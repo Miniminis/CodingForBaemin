@@ -4,3 +4,21 @@
   padding: 15px;
   margin: auto;
 }
+.mb-4 {
+    margin-bottom: 1.5rem!important;
+}
+.bg-dark {
+    background-color: #343a40!important;
+}
+
+@media (min-width: 768px)
+.navbar-expand-md {
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+}
