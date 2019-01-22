@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<body class="text-center">
+  <div class="col-md-6 col-md-offset-3">
+  <h2>메뉴 리스트입니다.</h2>
+  <table class="table">
+    <tr>
+      <th>이미지</th>
+      <th>메뉴 이름</th>
+      <th>가격</th>
+    </tr>
+    {% for menu in menu_list %}
+    <tr>
+      <td>{{ menu.image }}</td>
+      <td>{{ menu.name }}</td>
+      <td>{{ menu.price }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="/partner/menu/add">
+  <button class="btn btn-default btn-block">
+    메뉴 추가하기
+  </button>
+  </a>
+  </div>
+</body>
+{% endblock%}

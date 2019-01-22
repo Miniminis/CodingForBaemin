@@ -4,20 +4,51 @@
 {% include "navbar.html" %}
 <div class = "container">
   {% if user.is_authenticated %}
-    {% if user.parner %}
-      환영합니다.
-      <div>
-        {{user.partner.name}}
+    {% if user.partner %}
+    <div class = "row">
+      <div class ="col-sm-8 col-sm-offset-2">
+        <h2>환영합니다.</h2>
+        <table class="table">
+          <tr>
+            <th>
+              업체이름
+            </th>
+            <td>
+            {{user.partner.name}}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              연락처
+            </th>
+            <td>
+            {{user.partner.contact}}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              주소
+            </th>
+            <td>
+            {{user.partner.address}}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              업체 소개
+            </th>
+            <td>
+            {{user.partner.description}}
+            </td>
+          </tr>
+        </table>
+        <a href="/partner/edit_info/">
+          <button class="btn btn-default btn-block">
+            수정하기
+          </button>
+        </a>
       </div>
-      <div>
-        {{user.partner.contact}}
-      </div>
-      <div>
-        {{user.partner.address}}
-      </div>
-      <div>
-        {{user.partner.description}}
-      </div>
+    </div>
     {% else %}
       추가정보를 입력하세요.
       <div class = "row">

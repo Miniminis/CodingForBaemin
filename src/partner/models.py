@@ -19,3 +19,19 @@ class Partner(models.Model):
     description = models.TextField(
         verbose_name="업체소개",
     )
+
+class Menu(models.Model):
+    partner = models.ForeignKey(
+        Partner,
+        on_delete=models.CASCADE,
+    )
+    image = models.ImageField(
+        verbose_name="메뉴 이미지"
+    )
+    name = models.CharField(
+        max_length=50,
+        verbose_name="메뉴 이름"
+    )
+    price = models.PositiveIntegerField(
+        verbose_name="메뉴 가격"
+    )
