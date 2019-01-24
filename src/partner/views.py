@@ -71,7 +71,8 @@ def edit_info(request):
     elif request.method =="POST":
         partner_form = PartnerForm(
             request.POST,
-            instance=request.user.partner)
+            instance=request.user.partner
+        )
         if partner_form.is_valid():
             partner = partner_form.save(commit=False)
             partner.user = request.user
