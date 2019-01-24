@@ -95,10 +95,10 @@ def menu_add(request):
     if request.method == "GET":
         form = MenuForm()
         ctx.update ({"form" : form})
-    elif request.method =="POST":
+    elif request.method == "POST":
         form = MenuForm(request.POST, request.FILES)
         if form.is_valid():
-            menu = form.save(commit=false)
+            menu = form.save(commit=False)
             menu.partner = request.user.partner
             menu.save()
             return redirect("/partner/menu/")
