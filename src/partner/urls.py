@@ -3,7 +3,7 @@ from .views import (
     index,
     signup, login, logout,
     edit_info,
-    menu, menu_add, menu_detail, menu_edit,
+    menu, menu_add, menu_detail, menu_edit, menu_delete,
 )
 
 urlpatterns = [
@@ -16,4 +16,5 @@ urlpatterns = [
     path('menu/add/', menu_add, name ="menu_add" ),
     path('menu/<int:menu_id>/', menu_detail, name ="menu_detail" ),
     path('menu/<int:menu_id>/edit/', menu_edit, name ="menu_edit" ),
+    path('menu/<int:menu_id>/delete/', menu_delete, name ="menu_delete" ),
 ]
