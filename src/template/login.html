@@ -12,6 +12,13 @@
       {{error}}
     <button class="btn btn-lg btn-primary btn-block"
       type="submit">log in</button>
+    <a href = "/partner/login/">
+      {% if is_client %}
+      <div class="text-center">
+      업체용 로그인
+      </div>
+      {% endif %}
+    </a>
   </form>
 </body>
 {% endblock %}
