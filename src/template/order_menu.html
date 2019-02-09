@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<body class="text-center">
+  <div class="col-md-6 col-md-offset-3">
+  <h2>{{partner.name}}의 메뉴판</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    <table class="table">
+      <tr>
+        <th>이미지</th>
+        <th>메뉴 이름</th>
+        <th>가격</th>
+        <th>주문 개수</th>
+      </tr>
+      {% for menu in menu_list %}
+      <tr>
+        <td><img style="max-width : 150px;" src="{{ menu.image.url }}"></td>
+        <td><a href="/partner/menu/{{ menu.id }}/">{{ menu.name }}</a></td>
+        <td>{{ menu.price }}</td>
+        <td><input name="{{ menu_id }}" type="number" /></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <button class="btn btn-default btn-block" type="submit">주문하기</button>
+  </form>
+  </div>
+</body>
+{% endblock%}

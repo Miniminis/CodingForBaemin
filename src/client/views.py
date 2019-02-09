@@ -1,7 +1,10 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import (
+    authenticate,
+    login as auth_login,
+)
 from django.contrib.auth.models import User, Group
-from django.shortcuts import render
-from partner.models import Partner
+from django.shortcuts import render, redirect
+from partner.models import Partner, Menu
 # Create your views here.
 
 def index(request):
@@ -22,14 +25,17 @@ def common_signup(request, ctx, group):
 
         user = User.objects.create_user(username, email, password)
         target_group = Group.objects.get(name=group)
-        user.add(target_group)
+        user.groups.add(target_group)
 
-        #Article.objects.creat(title", content="")
+        if group =="client":
+            Client.objects.create(user="user", name="username")
+
+        #Article.objects.create(title"", content="")
     return render(request, "signup.html", ctx)
 
 def signup(request):
     ctx = { "is_client" : True }
-    return common_signup(request, signup, "client")
+    return common_signup(request, ctx, "client")
 
 def common_login(request, ctx, group):
     if request.method == "GET":
@@ -40,7 +46,7 @@ def common_login(request, ctx, group):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            if group not in user.groups.all():
+            if group not in [group.name for group in user.groups.all()]:
                 ctx.update({"error" : "접근 권한이 없습니다."})
             else:
                 auth_login(request, user)
@@ -48,7 +54,10 @@ def common_login(request, ctx, group):
                 if next_value:
                     return redirect(next_value)
                 else:
-                    return redirect("/partner/")
+                    if group =="partner":
+                        return redirect("/partner/")
+                    else:
+                        return redirect("/")
         else:
             ctx.update({"error" : "사용자가 없습니다."})
 
@@ -57,3 +66,16 @@ def common_login(request, ctx, group):
 def login(request):
     ctx = { "is_client" : True }
     return common_login(request, ctx, "client")
+
+def order(request, partner_id):
+    ctx = {}
+    # if request.user.is_anonymous or request.user.partner is None:
+        # return redirect ("/partner/")
+    partner = Partner.objects.get(id=partner_id)
+    menu_list = Menu.objects.filter(partner = partner)
+    ctx.update({
+        "partner" : partner,
+        "menu_list" : menu_list
+    })
+
+    return render(request, "order_menu.html", ctx)
