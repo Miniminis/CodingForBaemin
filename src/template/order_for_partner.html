@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<body class="text-center">
+  <div class="col-md-6 col-md-offset-3">
+  <h2>주문 내역</h2>
+  <table class="table">
+    <tr>
+      <th>고객명</th>
+      <th>고객 주소</th>
+      <th>주문 메뉴</th>
+    </tr>
+    {% for order in order_set %}
+    <tr>
+      <td>{{ order.client.name }}</td>
+      <td>{{ order.address }}</td>
+      <td>{{ order.address }}</td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </table>
+  </div>
+</body>
+{% endblock%}
